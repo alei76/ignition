@@ -22,8 +22,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
@@ -32,8 +31,9 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
- * Spring JavaConfig configuration class to setup a Spring container and infrastructure components like a
- * {@link DataSource}, a {@link EntityManagerFactory} and a {@link PlatformTransactionManager}.
+ * Spring JavaConfig configuration class to setup a Spring container and
+ * infrastructure components like a {@link DataSource}, a
+ * {@link EntityManagerFactory} and a {@link PlatformTransactionManager}.
  * 
  * @author Oliver Gierke
  */
@@ -48,18 +48,26 @@ class ApplicationConfig {
 	 * 
 	 * @return
 	 * @see http 
-	 *      ://static.springsource.org/spring/docs/3.1.x/spring-framework-reference/html/jdbc.html#jdbc-embedded-database
-	 *      -support
+	 *      ://static.springsource.org/spring/docs/3.1.x/spring-framework-reference
+	 *      /html/jdbc.html#jdbc-embedded-database -support
 	 */
 	@Bean
 	public DataSource dataSource() {
-		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-		return builder.setType(EmbeddedDatabaseType.HSQL).build();
+		// EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+		// return builder.setType(EmbeddedDatabaseType.HSQL).build();
+		return new SimpleDriverDataSource() {
+			{
+				setDriverClass(com.mysql.jdbc.Driver.class);
+				setUsername("root");
+				setUrl("jdbc:mysql://localhost/ignition");
+				setPassword("root");
+			}
+		};
 	}
 
 	/**
-	 * Sets up a {@link LocalContainerEntityManagerFactoryBean} to use Hibernate. Activates picking up entities from the
-	 * project's base package.
+	 * Sets up a {@link LocalContainerEntityManagerFactoryBean} to use
+	 * Hibernate. Activates picking up entities from the project's base package.
 	 * 
 	 * @return
 	 */
@@ -67,7 +75,8 @@ class ApplicationConfig {
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-		vendorAdapter.setDatabase(Database.HSQL);
+		vendorAdapter.setDatabase(Database.MYSQL);
+		// vendorAdapter.setDatabase(Database.HSQL);
 		vendorAdapter.setGenerateDdl(true);
 
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
