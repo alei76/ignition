@@ -34,9 +34,9 @@ public class Application {
 		return new SimpleDriverDataSource() {
 			{
 				setDriverClass(com.mysql.jdbc.Driver.class);
-				setUsername("root");
+				setUsername("ignition");
 				setUrl("jdbc:mysql://localhost/ignition");
-				setPassword("root");
+				setPassword("ignition");
 			}
 		};
 	}
