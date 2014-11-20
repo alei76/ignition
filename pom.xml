@@ -28,5 +28,13 @@
 		<name>Code Green</name>
 		<url>http://www.go-codegreen.com</url>
 	</organization>
-
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>1.14.8</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>

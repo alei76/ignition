@@ -34,8 +34,8 @@ public class Application {
 		return new SimpleDriverDataSource() {
 			{
 				setDriverClass(com.mysql.jdbc.Driver.class);
-				setUsername("ignition");
 				setUrl("jdbc:mysql://localhost/ignition");
+				setUsername("ignition");
 				setPassword("ignition");
 			}
 		};
@@ -52,7 +52,7 @@ public class Application {
 
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		vendorAdapter.setDatabase(Database.MYSQL);
-		// vendorAdapter.setDatabase(Database.HSQL);
+//	vendorAdapter.setDatabase(Database.HSQL);
 		vendorAdapter.setGenerateDdl(true);
 
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
