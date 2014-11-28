@@ -1,6 +1,7 @@
 package hello.solr;
 
-import hello.repository.jpa.Customer;
+import hello.domain.Customer;
+import hello.repository.rest.CustomerDocumentRepository;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityNotFoundException;
@@ -19,14 +20,16 @@ public class CustomerIndexIndexImpl implements CustomerIndexService {
 	public void addToIndex(Customer customer) {
 		CustomerDocument document = CustomerDocument
 				.getBuilder(customer.getId())
-				.firstName(customer.getFirstName()).lastName(customer.getLastName()).build();
+				.firstName(customer.getFirstName())
+				.lastName(customer.getLastName()).build();
 		repository.save(document);
 
 	}
 
 	@Transactional
 	@Override
-	public void deleteFromIndex(Customer customer)  throws EntityNotFoundException {
+	public void deleteFromIndex(Customer customer)
+			throws EntityNotFoundException {
 		repository.delete(customer.getId());
 	}
 }

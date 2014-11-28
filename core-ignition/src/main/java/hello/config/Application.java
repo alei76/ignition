@@ -1,6 +1,7 @@
 package hello.config;
 
 import java.net.URI;
+import java.util.Arrays;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -19,6 +20,17 @@ public class Application extends RepositoryRestMvcConfiguration {
 
 	public static void main(String[] args) {
 		context = SpringApplication.run(Application.class, args);
+
+		if (args.length == 1 && "beans".equalsIgnoreCase(args[0])) {
+			System.out
+					.println("Let's inspect the beans provided by Spring Boot:");
+
+			String[] beanNames = context.getBeanDefinitionNames();
+			Arrays.sort(beanNames);
+			for (String beanName : beanNames) {
+				System.out.println(beanName);
+			}
+		}
 	}
 
 	@Override

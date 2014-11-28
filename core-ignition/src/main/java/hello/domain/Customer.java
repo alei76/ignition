@@ -1,4 +1,4 @@
-package hello.repository.jpa;
+package hello.domain;
 
 import java.util.Date;
 

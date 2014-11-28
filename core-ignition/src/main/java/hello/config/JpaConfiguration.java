@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories(basePackages={"hello.repository.jpa"})
 @EntityScan(basePackages={"hello.domain"})
 @EnableTransactionManagement
-
 public class JpaConfiguration {
 
 }

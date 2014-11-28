@@ -1,4 +1,6 @@
-package hello.solr;
+package hello.repository.rest;
+
+import hello.solr.CustomerDocument;
 
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.solr.repository.SolrCrudRepository;
