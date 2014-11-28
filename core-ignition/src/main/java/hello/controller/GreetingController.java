@@ -1,7 +1,7 @@
 package hello.controller;
 
 import hello.domain.Customer;
-import hello.domain.CustomerRepository;
+import hello.repository.jpa.CustomerRepository;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -14,26 +14,28 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GreetingController {
 
-    private static final String template = "Hello, %s!";
-    private final AtomicLong counter = new AtomicLong();
+	private static final String template = "Hello, %s!";
+	private final AtomicLong counter = new AtomicLong();
 
-    @RequestMapping("/greeting")
-    public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
+	@RequestMapping("/greeting")
+	public Greeting greeting(
+			@RequestParam(value = "name", defaultValue = "World") String name) {
 		try {
 			doJpa();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-    	return new Greeting(counter.incrementAndGet(),
-                            String.format(template, name));
-    }
+		return new Greeting(counter.incrementAndGet(), String.format(template,
+				name));
+	}
+
 	@Autowired
 	CustomerRepository repository;
 
 	private void doJpa() {
 		// save a couple of customers
-		System.out.println("AAAAAAAAAAAAAAA"+repository);
+		System.out.println("AAAAAAAAAAAAAAA" + repository);
 		repository.save(new Customer("Jack", "Bauer"));
 		System.out.println("AAAAAAAAAAAAAAA");
 		repository.save(new Customer("Chloe", "O'Brian"));
@@ -58,7 +60,8 @@ public class GreetingController {
 
 		// fetch an individual customer by ID
 		Customer customer = repository.findOne(anId);
-		System.out.println(String.format("Customer found with findOne(%s):",anId));
+		System.out.println(String.format("Customer found with findOne(%s):",
+				anId));
 		System.out.println("--------------------------------");
 		System.out.println(customer);
 		System.out.println();

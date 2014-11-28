@@ -1,4 +1,6 @@
-package hello.domain;
+package hello.repository.jpa;
+
+import hello.domain.Customer;
 
 import java.util.List;
 
