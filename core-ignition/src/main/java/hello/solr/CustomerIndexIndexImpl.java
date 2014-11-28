@@ -1,7 +1,7 @@
 package hello.solr;
 
 import hello.domain.Customer;
-import hello.repository.rest.CustomerDocumentRepository;
+import hello.repository.solr.CustomerDocumentRepository;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityNotFoundException;

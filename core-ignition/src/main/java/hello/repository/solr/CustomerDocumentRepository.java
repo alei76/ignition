@@ -1,4 +1,4 @@
-package hello.repository.rest;
+package hello.repository.solr;
 
 import hello.solr.CustomerDocument;
 
