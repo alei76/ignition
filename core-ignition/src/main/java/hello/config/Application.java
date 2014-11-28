@@ -10,9 +10,10 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
 
-@Import({ RepositoryRestMvcConfiguration.class, JpaConfiguration.class })
 @ComponentScan(basePackages = { "hello.config.liquibase", "hello.controller" })
 @EnableAutoConfiguration
+@Import({ JpaConfiguration.class })
+// RepositoryRestMvcConfiguration.class
 public class Application extends RepositoryRestMvcConfiguration {
 	public static ConfigurableApplicationContext context;
 

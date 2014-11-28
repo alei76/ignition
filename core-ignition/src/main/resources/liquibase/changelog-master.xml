@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
-
+<!-- 	<property name="now" value="(SELECT NOW())" dbms="mysql" />
+	<property name="now" value="CURRENT_DATE" dbms="hsqldb" />
+ -->
 	<changeSet id="sample" author="jkolean">
-			<createTable tableName="sample">
+		<createTable tableName="sample">
 			<column name="id" type="varchar(36)">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
-			<column name="version" type="int" defaultValueNumeric="0" remarks="optimistic locking">
+			<column name="version" type="int" defaultValueNumeric="0"
+				remarks="optimistic locking">
 				<constraints nullable="false" />
 			</column>
 			<column name="insert_t" type="datetime" remarks="insert time">
@@ -19,6 +22,62 @@
 				<constraints nullable="false" />
 			</column>
 		</createTable>
-	
 	</changeSet>
-</databaseChangeLog>
+<!-- 	<changeSet id="add-customers" author="jkolean">
+
+		<insert tableName="customer">
+			<column name="id" value="CUSTOMER-0001"></column>
+			<column name="version" valueNumeric="0"></column>
+			<column name="insert_dt" valueDate="${now}"></column>
+			<column name="tlm_dt" valueDate="${now}"></column>
+			<column name="version" valueNumeric="0"></column>
+			<column name="first_name" value="James"></column>
+			<column name="last_name" value="Smith"></column>
+		</insert>
+		<insert tableName="customer">
+			<column name="id" value="CUSTOMER-0002"></column>
+			<column name="version" valueNumeric="0"></column>
+			<column name="insert_dt" valueDate="${now}"></column>
+			<column name="tlm_dt" valueDate="${now}"></column>
+			<column name="version" valueNumeric="0"></column>
+			<column name="first_name" value="Tracy"></column>
+			<column name="last_name" value="Smith"></column>
+		</insert>
+		<insert tableName="customer">
+			<column name="id" value="CUSTOMER-0003"></column>
+			<column name="version" valueNumeric="0"></column>
+			<column name="insert_dt" valueDate="${now}"></column>
+			<column name="tlm_dt" valueDate="${now}"></column>
+			<column name="version" valueNumeric="0"></column>
+			<column name="first_name" value="Kayla"></column>
+			<column name="last_name" value="Smith"></column>
+		</insert>
+		<insert tableName="customer">
+			<column name="id" value="CUSTOMER-0004"></column>
+			<column name="version" valueNumeric="0"></column>
+			<column name="insert_dt" valueDate="${now}"></column>
+			<column name="tlm_dt" valueDate="${now}"></column>
+			<column name="version" valueNumeric="0"></column>
+			<column name="first_name" value="Ryan"></column>
+			<column name="last_name" value="Smith"></column>
+		</insert>
+		<insert tableName="customer">
+			<column name="id" value="CUSTOMER-0005"></column>
+			<column name="version" valueNumeric="0"></column>
+			<column name="insert_dt" valueDate="${now}"></column>
+			<column name="tlm_dt" valueDate="${now}"></column>
+			<column name="version" valueNumeric="0"></column>
+			<column name="first_name" value="Jesse"></column>
+			<column name="last_name" value="Smith"></column>
+		</insert>
+		<insert tableName="customer">
+			<column name="id" value="CUSTOMER-0006"></column>
+			<column name="version" valueNumeric="0"></column>
+			<column name="insert_dt" valueDate="${now}"></column>
+			<column name="tlm_dt" valueDate="${now}"></column>
+			<column name="version" valueNumeric="0"></column>
+			<column name="first_name" value="Nick"></column>
+			<column name="last_name" value="Smith"></column>
+		</insert>
+	</changeSet>
+ --></databaseChangeLog>

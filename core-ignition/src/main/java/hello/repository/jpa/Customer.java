@@ -1,4 +1,4 @@
-package hello.domain;
+package hello.repository.jpa;
 
 import java.util.Date;
 
@@ -20,6 +20,35 @@ public class Customer {
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	@Column(name = "id", length = 36)
 	private String id;
+
+	@Column(name = "insert_dt", updatable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date insertDate = new Date();
+
+	@Column(name = "tlm_dt")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date updateDate = new Date();
+
+	@Version
+	@Column(name = "version")
+	private int version = 0;
+	private String firstName;
+	private String lastName;
+
+	protected Customer() {
+	}
+
+	public Customer(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"Customer[id=%s, version=%d, firstName='%s', lastName='%s']",
+				id, version, firstName, lastName);
+	}
 
 	public String getId() {
 		return id;
@@ -68,32 +97,4 @@ public class Customer {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
-	@Column(name = "insert_dt", updatable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date insertDate = new Date();
-
-	@Column(name = "tlm_dt")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date updateDate = new Date();
-
-	@Version
-	@Column(name = "version")
-	private int version = 0;
-	private String firstName;
-	private String lastName;
-
-	protected Customer() {
-	}
-
-	public Customer(String firstName, String lastName) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-	}
-
-	@Override
-	public String toString() {
-		return String.format("Customer[id=%s, version=%d, firstName='%s', lastName='%s']", id, version, firstName, lastName);
-	}
-
 }

@@ -1,6 +1,6 @@
 package hello.controller;
 
-import hello.domain.Customer;
+import hello.repository.jpa.Customer;
 import hello.repository.jpa.CustomerRepository;
 
 import java.util.List;
@@ -34,18 +34,18 @@ public class GreetingController {
 	CustomerRepository repository;
 
 	private void doJpa() {
-		// save a couple of customers
-		System.out.println("AAAAAAAAAAAAAAA" + repository);
-		repository.save(new Customer("Jack", "Bauer"));
-		System.out.println("AAAAAAAAAAAAAAA");
-		repository.save(new Customer("Chloe", "O'Brian"));
-		System.out.println("AAAAAAAAAAAAAAA");
-		repository.save(new Customer("Kim", "Bauer"));
-		System.out.println("AAAAAAAAAAAAAAA");
-		repository.save(new Customer("David", "Palmer"));
-		System.out.println("AAAAAAAAAAAAAAA");
-		repository.save(new Customer("Michelle", "Dessler"));
-		System.out.println("AAAAAAAAAAAAAAA");
+//		// save a couple of customers
+//		System.out.println("AAAAAAAAAAAAAAA" + repository);
+//		repository.save(new Customer("Jack", "Bauer"));
+//		System.out.println("AAAAAAAAAAAAAAA");
+//		repository.save(new Customer("Chloe", "O'Brian"));
+//		System.out.println("AAAAAAAAAAAAAAA");
+//		repository.save(new Customer("Kim", "Bauer"));
+//		System.out.println("AAAAAAAAAAAAAAA");
+//		repository.save(new Customer("David", "Palmer"));
+//		System.out.println("AAAAAAAAAAAAAAA");
+//		repository.save(new Customer("Michelle", "Dessler"));
+//		System.out.println("AAAAAAAAAAAAAAA");
 
 		// fetch all customers
 		Iterable<Customer> customers = repository.findAll();
