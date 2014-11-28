@@ -1,4 +1,4 @@
-package hello.domain;
+package hello.repository.jpa;
 
 import java.util.List;
 
