@@ -3,11 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
-<!-- 	<property name="now" value="(SELECT NOW())" dbms="mysql" />
+ 	<property name="now" value="(SELECT NOW())" dbms="mysql" />
 	<property name="now" value="CURRENT_DATE" dbms="hsqldb" />
- -->
-	<changeSet id="sample" author="jkolean">
-		<createTable tableName="sample">
+ 
+	<changeSet id="customer" author="jkolean">
+		<createTable tableName="customer">
 			<column name="id" type="varchar(36)">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
@@ -15,22 +15,24 @@
 				remarks="optimistic locking">
 				<constraints nullable="false" />
 			</column>
-			<column name="insert_t" type="datetime" remarks="insert time">
+			<column name="insert_dt" type="datetime" remarks="insert time">
 				<constraints nullable="false" />
 			</column>
-			<column name="update_t" type="datetime" remarks="undate time">
+			<column name="tlm_dt" type="datetime" remarks="undate time">
 				<constraints nullable="false" />
 			</column>
+			<column name="first_name" type="varchar(512)" />
+			<column name="last_name" type="varchar(512)" />
 		</createTable>
 	</changeSet>
-<!-- 	<changeSet id="add-customers" author="jkolean">
+	
+	<changeSet id="add-customers" author="jkolean">
 
 		<insert tableName="customer">
 			<column name="id" value="CUSTOMER-0001"></column>
 			<column name="version" valueNumeric="0"></column>
 			<column name="insert_dt" valueDate="${now}"></column>
 			<column name="tlm_dt" valueDate="${now}"></column>
-			<column name="version" valueNumeric="0"></column>
 			<column name="first_name" value="James"></column>
 			<column name="last_name" value="Smith"></column>
 		</insert>
@@ -39,7 +41,6 @@
 			<column name="version" valueNumeric="0"></column>
 			<column name="insert_dt" valueDate="${now}"></column>
 			<column name="tlm_dt" valueDate="${now}"></column>
-			<column name="version" valueNumeric="0"></column>
 			<column name="first_name" value="Tracy"></column>
 			<column name="last_name" value="Smith"></column>
 		</insert>
@@ -48,7 +49,6 @@
 			<column name="version" valueNumeric="0"></column>
 			<column name="insert_dt" valueDate="${now}"></column>
 			<column name="tlm_dt" valueDate="${now}"></column>
-			<column name="version" valueNumeric="0"></column>
 			<column name="first_name" value="Kayla"></column>
 			<column name="last_name" value="Smith"></column>
 		</insert>
@@ -57,7 +57,6 @@
 			<column name="version" valueNumeric="0"></column>
 			<column name="insert_dt" valueDate="${now}"></column>
 			<column name="tlm_dt" valueDate="${now}"></column>
-			<column name="version" valueNumeric="0"></column>
 			<column name="first_name" value="Ryan"></column>
 			<column name="last_name" value="Smith"></column>
 		</insert>
@@ -66,7 +65,6 @@
 			<column name="version" valueNumeric="0"></column>
 			<column name="insert_dt" valueDate="${now}"></column>
 			<column name="tlm_dt" valueDate="${now}"></column>
-			<column name="version" valueNumeric="0"></column>
 			<column name="first_name" value="Jesse"></column>
 			<column name="last_name" value="Smith"></column>
 		</insert>
@@ -75,9 +73,59 @@
 			<column name="version" valueNumeric="0"></column>
 			<column name="insert_dt" valueDate="${now}"></column>
 			<column name="tlm_dt" valueDate="${now}"></column>
-			<column name="version" valueNumeric="0"></column>
 			<column name="first_name" value="Nick"></column>
 			<column name="last_name" value="Smith"></column>
 		</insert>
 	</changeSet>
- --></databaseChangeLog>
+
+ 	<changeSet id="product" author="jkolean">
+		<createTable tableName="product">
+			<column name="id" type="varchar(36)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="version" type="int" defaultValueNumeric="0"
+				remarks="optimistic locking">
+				<constraints nullable="false" />
+			</column>
+			<column name="sku" type="varchar(128)"> 
+				<constraints nullable="false" />
+			</column>
+			<column name="description" type="varchar(1024)" >
+				<constraints nullable="true" />
+			</column>
+			<column name="insert_dt" type="datetime" remarks="insert time">
+				<constraints nullable="false" />
+			</column>
+			<column name="tlm_dt" type="datetime" remarks="undate time">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+ 	<changeSet id="add_product" author="jkolean">
+		<insert tableName="product">
+			<column name="id" value="PRODUCT-0001"></column>
+			<column name="version" valueNumeric="0"></column>
+			<column name="insert_dt" valueDate="${now}"></column>
+			<column name="tlm_dt" valueDate="${now}"></column>
+			<column name="sku" value="SKU-001"></column>
+			<column name="description" value="1/4 inch bolt"></column>
+		</insert>
+		<insert tableName="product">
+			<column name="id" value="PRODUCT-0002"></column>
+			<column name="version" valueNumeric="0"></column>
+			<column name="insert_dt" valueDate="${now}"></column>
+			<column name="tlm_dt" valueDate="${now}"></column>
+			<column name="sku" value="SKU-002"></column>
+			<column name="description" value="1/2 inch bolt"></column>
+		</insert>
+		<insert tableName="product">
+			<column name="id" value="PRODUCT-0003"></column>
+			<column name="version" valueNumeric="0"></column>
+			<column name="insert_dt" valueDate="${now}"></column>
+			<column name="tlm_dt" valueDate="${now}"></column>
+			<column name="sku" value="SKU-003"></column>
+			<column name="description" value="1/4 inch nut"></column>
+		</insert>
+ </changeSet>
+ 
+ </databaseChangeLog>

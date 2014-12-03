@@ -5,10 +5,12 @@ import lombok.NoArgsConstructor;
 
 import org.apache.solr.client.solrj.beans.Field;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.solr.core.mapping.SolrDocument;
 
 @Data 
 @NoArgsConstructor
-public class CustomerDocument {
+@SolrDocument(solrCoreName="customer")
+public class CustomerSolr {
 
 	@Id
 	@Field
@@ -26,10 +28,10 @@ public class CustomerDocument {
 	}
 
 	public static class Builder {
-		private CustomerDocument build;
+		private CustomerSolr build;
 
 		public Builder(String id) {
-			build = new CustomerDocument();
+			build = new CustomerSolr();
 			build.id = id;
 		}
 
@@ -42,7 +44,7 @@ public class CustomerDocument {
 			return this;
 		}
 		
-		public CustomerDocument build() {
+		public CustomerSolr build() {
 			return build;
 		}
 	}

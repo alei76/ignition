@@ -2,11 +2,17 @@ package hello.controller;
 
 import hello.domain.Customer;
 import hello.repository.jpa.CustomerRepository;
+import hello.service.CustomerService;
+import hello.service.ProductService;
+import hello.solr.CustomerSolr;
+import hello.solr.ProductSolr;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +28,7 @@ public class GreetingController {
 			@RequestParam(value = "name", defaultValue = "World") String name) {
 		try {
 			doJpa();
+			doSolr();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -33,19 +40,31 @@ public class GreetingController {
 	@Autowired
 	CustomerRepository repository;
 
+	@Autowired
+	CustomerService customerService;
+	@Autowired
+	ProductService productService;
+
+	private void doSolr() {
+		System.out.println("Solr Customers found:");
+		for (CustomerSolr doc : customerService.search("Smith")) {
+			System.out.println(doc.toString());
+		}
+		System.out.println("Solr Products found:");
+		List<ProductSolr> productsPage = productService.search("bolt");
+		for (ProductSolr productSolr : productsPage) {
+			System.out.println(productSolr.toString());
+		}
+	}
+
 	private void doJpa() {
+
 		// // save a couple of customers
-		// System.out.println("AAAAAAAAAAAAAAA" + repository);
 		// repository.save(new Customer("Jack", "Bauer"));
-		// System.out.println("AAAAAAAAAAAAAAA");
 		// repository.save(new Customer("Chloe", "O'Brian"));
-		// System.out.println("AAAAAAAAAAAAAAA");
 		// repository.save(new Customer("Kim", "Bauer"));
-		// System.out.println("AAAAAAAAAAAAAAA");
 		// repository.save(new Customer("David", "Palmer"));
-		// System.out.println("AAAAAAAAAAAAAAA");
 		// repository.save(new Customer("Michelle", "Dessler"));
-		// System.out.println("AAAAAAAAAAAAAAA");
 
 		// fetch all customers
 		Iterable<Customer> customers = repository.findAll();

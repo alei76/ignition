@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableJpaRepositories(basePackages={"hello.repository.jpa"})
+@EnableJpaRepositories(basePackages={"hello.repository.jpa"}, repositoryImplementationPostfix="Impl" )
 @EntityScan(basePackages={"hello.domain"})
 @EnableTransactionManagement
 public class JpaConfiguration {
