@@ -13,6 +13,8 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,10 +53,14 @@ public class GreetingController {
 			System.out.println(doc.toString());
 		}
 		System.out.println("Solr Products found:");
-		List<ProductSolr> productsPage = productService.search("bolt");
+		Pageable pageSpecification = new PageRequest(0, 20, sortBySkuAsc());
+		Page<ProductSolr> productsPage = productService.search("bolt", pageSpecification);
 		for (ProductSolr productSolr : productsPage) {
 			System.out.println(productSolr.toString());
 		}
+	}
+	private	Sort sortBySkuAsc() {
+	        return new Sort(Sort.Direction.ASC, "sku");
 	}
 
 	private void doJpa() {

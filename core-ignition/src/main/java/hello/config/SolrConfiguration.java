@@ -23,20 +23,20 @@ public class SolrConfiguration {
 	@Bean
 	public SolrServer solrServer() {
 		return new HttpSolrServer(
-				environment.getRequiredProperty("solr.server.url"));
+				environment.getRequiredProperty("spring.data.solr.host"));
 	}
 
 	@Bean(name = "solrCustomerTemplate")
 	public SolrTemplate solrProductsTemplate() throws Exception {
 		HttpSolrServer httpSolrServer = new HttpSolrServer(
-				environment.getRequiredProperty("solr.server.url"));
+				environment.getRequiredProperty("spring.data.solr.host"));
 		return new SolrTemplate(httpSolrServer, "customer");
 	}
 
 	@Bean(name = "solrProductTemplate")
 	public SolrTemplate solrDiscussionsTemplate() throws Exception {
 		HttpSolrServer httpSolrServer = new HttpSolrServer(
-				environment.getRequiredProperty("solr.server.url"));
+				environment.getRequiredProperty("spring.data.solr.host"));
 		return new SolrTemplate(httpSolrServer, "product");
 	}
 }

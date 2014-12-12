@@ -12,9 +12,10 @@ public interface ProductService {
 	 * Searches the products for the given search term.
 	 * 
 	 * @param searchTerm
+	 * @param pageable
 	 * @return The list of product documents. If no matches are not found, the
 	 *         method returns an empty list.
 	 */
-	public List<ProductSolr> search(String searchTerm);
+	public Page<ProductSolr> search(String searchTerm, Pageable pageable);
 
 }

@@ -1,6 +1,5 @@
 package hello.config;
 
-import java.net.URI;
 import java.util.Arrays;
 
 import org.springframework.boot.SpringApplication;
@@ -8,15 +7,12 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
-import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
-import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
 
-@ComponentScan(basePackages = { "hello.config.liquibase", "hello.controller",
-		"hello.service" })
+@ComponentScan(basePackages = { "hello.controller", "hello.service" })
 @EnableAutoConfiguration
 @Import({ JpaConfiguration.class, SolrConfiguration.class })
 // RepositoryRestMvcConfiguration.class
-public class Application extends RepositoryRestMvcConfiguration {
+public class Application {
 	public static ConfigurableApplicationContext context;
 
 	public static void main(String[] args) {
@@ -34,9 +30,4 @@ public class Application extends RepositoryRestMvcConfiguration {
 		}
 	}
 
-	@Override
-	protected void configureRepositoryRestConfiguration(
-			RepositoryRestConfiguration config) {
-		config.setBaseUri(URI.create("/api"));
-	}
 }

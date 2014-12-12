@@ -1,6 +1,7 @@
 package hello.repository.jpa;
 
 import hello.domain.Customer;
+import hello.service.Authorities;
 
 import java.util.List;
 
@@ -9,18 +10,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.data.rest.core.annotation.RestResource;
+import org.springframework.security.access.annotation.Secured;
 
+@Secured(Authorities.ROLE_USER)
 public interface CustomerRepository extends
 		PagingAndSortingRepository<Customer, String> {
 
-	@RestResource(path = "byLastName")
+	@Secured(Authorities.ROLE_ADMIN)
 	List<Customer> findByLastName(@Param("name") String lastName);
 
-	@RestResource(path = "byLastNamePaging")
 	Page<Customer> findByLastName(@Param("name") String lastName,
 			Pageable pageable);
 
-	@RestResource(path = "byLastNameSorting")
 	List<Customer> findByLastName(@Param("name") String lastName, Sort sort);
 }
