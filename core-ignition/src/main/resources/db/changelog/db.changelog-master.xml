@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
- 	<property name="now" value="(SELECT NOW())" dbms="mysql" />
+	<property name="now" value="(SELECT NOW())" dbms="mysql" />
 	<property name="now" value="CURRENT_DATE" dbms="hsqldb" />
- 
+
 	<changeSet id="customer" author="jkolean">
 		<createTable tableName="customer">
 			<column name="id" type="varchar(36)">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
-			<column name="version" type="int" defaultValueNumeric="0"
-				remarks="optimistic locking">
+			<column name="version" type="int" defaultValueNumeric="0" remarks="optimistic locking">
 				<constraints nullable="false" />
 			</column>
 			<column name="insert_dt" type="datetime" remarks="insert time">
@@ -25,7 +23,7 @@
 			<column name="last_name" type="varchar(512)" />
 		</createTable>
 	</changeSet>
-	
+
 	<changeSet id="add-customers" author="jkolean">
 
 		<insert tableName="customer">
@@ -78,19 +76,18 @@
 		</insert>
 	</changeSet>
 
- 	<changeSet id="product" author="jkolean">
+	<changeSet id="product" author="jkolean">
 		<createTable tableName="product">
 			<column name="id" type="varchar(36)">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
-			<column name="version" type="int" defaultValueNumeric="0"
-				remarks="optimistic locking">
+			<column name="version" type="int" defaultValueNumeric="0" remarks="optimistic locking">
 				<constraints nullable="false" />
 			</column>
-			<column name="sku" type="varchar(128)"> 
+			<column name="sku" type="varchar(128)">
 				<constraints nullable="false" />
 			</column>
-			<column name="description" type="varchar(1024)" >
+			<column name="description" type="varchar(1024)">
 				<constraints nullable="true" />
 			</column>
 			<column name="insert_dt" type="datetime" remarks="insert time">
@@ -101,7 +98,7 @@
 			</column>
 		</createTable>
 	</changeSet>
- 	<changeSet id="add_product" author="jkolean">
+	<changeSet id="add_product" author="jkolean">
 		<insert tableName="product">
 			<column name="id" value="PRODUCT-0001"></column>
 			<column name="version" valueNumeric="0"></column>
@@ -126,6 +123,87 @@
 			<column name="sku" value="SKU-003"></column>
 			<column name="description" value="1/4 inch nut"></column>
 		</insert>
- </changeSet>
- 
- </databaseChangeLog>
+	</changeSet>
+	<changeSet id="security" author="jkolean">
+		<createTable tableName="users">
+			<column name="username" type="varchar(50)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="password" type="varchar(128)">
+				<constraints nullable="false" />
+			</column>
+			<column name="enabled" type="boolean">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<createTable tableName="user_roles">
+			<column name="user_role_id" type="bigint" autoIncrement="true">
+				<constraints nullable="false" primaryKey="true" />
+			</column>
+			<column name="username" type="varchar(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="role" type="varchar(50)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<createIndex indexName="idx_user_roles_username_role" tableName="user_roles" unique="true">
+			<column name="username" type="varchar(50)" />
+			<column name="role" type="varchar(50)" />
+		</createIndex>
+		<createTable tableName="authorities">
+			<column name="username" type="varchar(50)">
+				<constraints nullable="false" foreignKeyName="fk_authorities_users" references="users(username)" />
+			</column>
+			<column name="authority" type="varchar(50)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<createIndex indexName="idx_authorities_authority_username" tableName="authorities" unique="true">
+			<column name="username" type="varchar(50)" />
+			<column name="authority" type="varchar(50)" />
+		</createIndex>
+		<createTable tableName="groups">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="group_name" type="varchar(50)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<createTable tableName="group_authorities">
+			<column name="group_id" type="bigint">
+				<constraints nullable="false" foreignKeyName="fk_group_authorities_groups" references="groups(id)" />
+			</column>
+			<column name="authority" type="varchar(50)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<createTable tableName="group_members">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="username" type="varchar(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="group_id" type="bigint">
+				<constraints nullable="false" foreignKeyName="fk_group_members_groups" references="groups(id)" />
+			</column>
+		</createTable>
+	</changeSet>
+	<changeSet id="security_data" author="jkolean">
+		<insert tableName="users">
+			<column name="username" value="james" />
+			<column name="password" value="$2a$10$SmUHAOGE4D1np9plH9QOVONvROOD5EDjFeCWEtYVTJvD3nW8rcWAu" />
+			<column name="enabled" valueBoolean="true" />
+		</insert>
+		<insert tableName="user_roles">
+			<column name="username" value="james" />
+			<column name="role" value="USER" />
+		</insert>
+		<insert tableName="authorities">
+			<column name="username" value="james" />
+			<column name="authority" value="product_admin" />
+		</insert>
+	</changeSet>
+</databaseChangeLog>

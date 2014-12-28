@@ -1,6 +1,6 @@
 package core;
 
-import hello.Application;
+import hello.config.Application;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

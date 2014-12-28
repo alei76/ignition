@@ -1,4 +1,4 @@
-package hello;
+package hello.config;
 
 import java.util.Arrays;
 
@@ -7,28 +7,30 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 @Configuration
-@ComponentScan(basePackages={"hello.controller"})
+@ComponentScan(basePackages = { "hello.controller" })
 @EnableAutoConfiguration
+@Import({ SecurityConfiguration.class })
 public class Application {
 
 	public static ConfigurableApplicationContext context;
 
-	public static void main(String[] args) {
-
-		context = SpringApplication.run(Application.class, args);
-
-		//	inspectBeans();
-	}
-
 	protected static void inspectBeans() {
 		System.out.println("Let's inspect the beans provided by Spring Boot:");
 
-		String[] beanNames = context.getBeanDefinitionNames();
+		final String[] beanNames = context.getBeanDefinitionNames();
 		Arrays.sort(beanNames);
-		for (String beanName : beanNames) {
+		for (final String beanName : beanNames) {
 			System.out.println(beanName);
 		}
+	}
+
+	public static void main(final String[] args) {
+
+		context = SpringApplication.run(Application.class, args);
+
+		// inspectBeans();
 	}
 }
