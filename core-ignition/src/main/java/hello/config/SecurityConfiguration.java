@@ -13,42 +13,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-@Configuration
+//@Configuration
 // Security filters with filter chain are configured and applied
-@EnableWebMvcSecurity
+//@EnableWebMvcSecurity
 // Allows to run Spring schedulers and periodically run some tasks. We use
 // scheduler for evicting EhCache tokens.
-@EnableScheduling
+//@EnableScheduling
 // Allows AOP @PreAuthorize and some other annotations to be applied to methods
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-	@Value("${actuator.endpoints}")
+	// @Value("${actuator.endpoints}")
 	private String[] actuatorEndpoints;
 
-	@Value("${backend.admin.role}")
+	// @Value("${backend.admin.role}")
 	private String backendAdminRole;
 
-	@Autowired
+	// @Autowired
 	private DataSource dataSource;
 
-	@Bean
+	// @Bean
 	public AuthenticationProvider backendAdminUsernamePasswordAuthenticationProvider() {
 		return new BackendAdminUsernamePasswordAuthenticationProvider();
 	}
@@ -96,17 +89,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	// return jdbcUserDetailsManagerConfigurer;
 	// }
 
-	@Bean
+	// @Bean
 	public AuthenticationProvider tokenAuthenticationProvider() {
 		return new TokenAuthenticationProvider(tokenService());
 	}
 
-	@Bean
+	// @Bean
 	public TokenService tokenService() {
 		return new TokenService();
 	}
 
-	@Bean
+	// @Bean
 	public AuthenticationEntryPoint unauthorizedEntryPoint() {
 		return new AuthenticationEntryPoint() {
 			@Override

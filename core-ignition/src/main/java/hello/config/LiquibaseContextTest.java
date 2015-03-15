@@ -13,8 +13,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
+/**
+ * Use liquibase to set up the Database for the application
+ * 
+ * <pre>
+ * Create an empty schema called 'ignition' to get things rolling
+ * </pre>
+ * 
+ * @author jameskolean
+ *
+ */
 @Configuration
-//@Profile({ "test" })
+// @Profile({ "test" })
 @Slf4j
 public class LiquibaseContextTest {
 	@Autowired
@@ -28,7 +38,7 @@ public class LiquibaseContextTest {
 
 	@Bean(name = "liquibase")
 	public SpringLiquibase liquibase() {
-		SpringLiquibase liquibase = new SpringLiquibase();
+		final SpringLiquibase liquibase = new SpringLiquibase();
 		liquibase.setDataSource(dataSource);
 		liquibase.setChangeLog(environment.getRequiredProperty("liquibase.change-log"));
 		liquibase.setChangeLogParameters(new HashMap<String, String>());

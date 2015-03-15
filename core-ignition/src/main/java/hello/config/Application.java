@@ -10,21 +10,21 @@ import org.springframework.context.annotation.Import;
 
 @ComponentScan(basePackages = { "hello.controller", "hello.service" })
 @EnableAutoConfiguration
-@Import({ JpaConfiguration.class, SolrConfiguration.class , SecurityConfiguration.class })
+@Import({ JpaConfiguration.class })
+// @Import({ JpaConfiguration.class, SolrConfiguration.class , SecurityConfiguration.class })
 // RepositoryRestMvcConfiguration.class
 public class Application {
 	public static ConfigurableApplicationContext context;
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		context = SpringApplication.run(Application.class, args);
 
 		if (args.length == 1 && "beans".equalsIgnoreCase(args[0])) {
-			System.out
-					.println("Let's inspect the beans provided by Spring Boot:");
+			System.out.println("Let's inspect the beans provided by Spring Boot:");
 
-			String[] beanNames = context.getBeanDefinitionNames();
+			final String[] beanNames = context.getBeanDefinitionNames();
 			Arrays.sort(beanNames);
-			for (String beanName : beanNames) {
+			for (final String beanName : beanNames) {
 				System.out.println(beanName);
 			}
 		}
