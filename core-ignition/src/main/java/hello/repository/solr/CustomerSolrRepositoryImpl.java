@@ -6,6 +6,8 @@ import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.solr.core.SolrTemplate;
@@ -16,10 +18,9 @@ import org.springframework.stereotype.Repository;
 @Slf4j
 @Repository
 public class CustomerSolrRepositoryImpl implements CustomCustomerSolrRepository {
-
-	// @Autowired
-	// @Qualifier("solrCustomerTemplate")
-	SolrTemplate solrTemplate;
+	@Autowired
+	@Qualifier("solrCustomerTemplate")
+	protected SolrTemplate solrTemplate;
 
 	private Criteria createSearchConditions(final String[] words) {
 		Criteria conditions = null;

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Import;
 
 @ComponentScan(basePackages = { "hello.controller", "hello.service" })
 @EnableAutoConfiguration
-@Import({ JpaConfiguration.class })
+@Import({ JpaConfiguration.class, SolrConfiguration.class })
 // @Import({ JpaConfiguration.class, SolrConfiguration.class , SecurityConfiguration.class })
 // RepositoryRestMvcConfiguration.class
 public class Application {
