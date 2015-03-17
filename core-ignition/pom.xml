@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.codegreen</groupId>
@@ -35,8 +34,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-data-rest</artifactId> 
-			</dependency> -->
+		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-data-rest</artifactId> </dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -49,8 +47,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-aop</artifactId> 
-			</dependency> -->
+		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-aop</artifactId> </dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
@@ -88,11 +85,21 @@
 			<artifactId>ehcache-core</artifactId>
 			<version>2.6.9</version>
 		</dependency>
-	<dependency>
-		<groupId>junit</groupId>
-		<artifactId>junit</artifactId>
-		<scope>test</scope>
-	</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -124,8 +131,7 @@
 					<!-- <scanIntervalSeconds>10</scanIntervalSeconds> -->
 					<webAppConfig>
 						<contextPath>/</contextPath>
-						<!-- <resourceBases> <baseResource>src/main/webapp</baseResource> <baseResource>target/${project.artifactId}-${project.version}</baseResource> 
-							</resourceBases> -->
+						<!-- <resourceBases> <baseResource>src/main/webapp</baseResource> <baseResource>target/${project.artifactId}-${project.version}</baseResource> </resourceBases> -->
 					</webAppConfig>
 					<!-- <reload>manual</reload> -->
 					<systemProperties>
@@ -169,14 +175,10 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
-			<!-- Copy the basic-types.xsd to the target location. This one doesn't 
-				need any translation -->
-			<!-- <plugin> <artifactId>maven-resources-plugin</artifactId> <executions> 
-				<execution> <id>copy-resources</id> <phase>compile</phase> <goals> <goal>copy-resources</goal> 
-				</goals> <configuration> <outputDirectory>${basedir}/src/xform/out</outputDirectory> 
-				<resources> <resource> <directory>${basedir}/src/xform/xml</directory> <includes> 
-				<include>pom.xml</include> </includes> <filtering>false</filtering> </resource> 
-				</resources> </configuration> </execution> </executions> </plugin> -->
+			<!-- Copy the basic-types.xsd to the target location. This one doesn't need any translation -->
+			<!-- <plugin> <artifactId>maven-resources-plugin</artifactId> <executions> <execution> <id>copy-resources</id> <phase>compile</phase> <goals> <goal>copy-resources</goal> 
+				</goals> <configuration> <outputDirectory>${basedir}/src/xform/out</outputDirectory> <resources> <resource> <directory>${basedir}/src/xform/xml</directory> <includes> 
+				<include>pom.xml</include> </includes> <filtering>false</filtering> </resource> </resources> </configuration> </execution> </executions> </plugin> -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>xml-maven-plugin</artifactId>
@@ -200,8 +202,7 @@
 							<stylesheet>${basedir}/src/build/xslt/pom.jar.xsl</stylesheet>
 							<outputDir>${basedir}</outputDir>
 							<fileMappers>
-								<fileMapper
-									implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+								<fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
 									<targetExtension>.jar.xml</targetExtension>
 								</fileMapper>
 							</fileMappers>
@@ -233,8 +234,7 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
-					only. It has no influence on the Maven build itself. -->
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>

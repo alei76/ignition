@@ -39,7 +39,7 @@ public class PrintSolrController {
 	@Autowired(required = false)
 	protected CustomerRepository repository = null;
 
-	private String doSolr() {
+	protected String doSolr() {
 		final StringBuffer sb = new StringBuffer();
 		sb.append("Solr 'Smith' Customers found:\n");
 		for (final CustomerSolr doc : customerService.search("Smith")) {
@@ -54,6 +54,9 @@ public class PrintSolrController {
 		return sb.toString();
 	}
 
+	/**
+	 * @return info string. Note in a real controller this will be a bean that will be auto converted to JSON
+	 */
 	@RequestMapping("/solr/sample")
 	public String solrSample() {
 		String result = "Request failed";
