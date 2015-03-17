@@ -15,25 +15,24 @@ import org.springframework.core.env.Environment;
 
 /**
  * Use liquibase to set up the Database for the application
- * 
+ *
  * <pre>
  * Create an empty schema called 'ignition' to get things rolling
  * </pre>
- * 
+ *
  * @author jameskolean
  *
  */
 @Configuration
-// @Profile({ "test" })
 @Slf4j
-public class LiquibaseContextTest {
+public class LiquibaseContext {
 	@Autowired
 	private DataSource dataSource;
 	@Resource
 	private Environment environment;
 
-	public LiquibaseContextTest() {
-		log.debug("Creating LiquibaseContextTest");
+	public LiquibaseContext() {
+		log.debug("Creating LiquibaseContext");
 	}
 
 	@Bean(name = "liquibase")

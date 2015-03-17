@@ -1,4 +1,4 @@
-package hello.controller;
+package hello.domain;
 
 public class Greeting {
 

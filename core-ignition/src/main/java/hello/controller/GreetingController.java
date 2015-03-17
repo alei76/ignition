@@ -1,5 +1,6 @@
 package hello.controller;
 
+import hello.domain.Greeting;
 import hello.repository.jpa.CustomerRepository;
 
 import java.util.concurrent.atomic.AtomicLong;
